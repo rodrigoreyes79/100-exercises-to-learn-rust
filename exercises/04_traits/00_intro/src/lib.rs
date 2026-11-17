@@ -12,3 +12,5 @@ mod tests {
         assert_eq!(intro(), "I'm ready to learn about traits!");
     }
 }
+
+rKwTb%HU6P8HRS4CqyKf
