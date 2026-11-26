@@ -7,15 +7,35 @@
 struct Ticket {
     title: String,
     description: String,
-    status: String,
+    status: Status,
 }
 
+#[derive(Debug, PartialEq, Clone, Copy)]
 enum Status {
     // TODO: add the missing variants
+    ToDo,
+    InProgress,
+    Done,
+}
+
+impl Status {
+    fn as_str(&self) -> &'static str {
+        match self {
+            Status::Done => "Done",
+            Status::InProgress => "In Progress",
+            Status::ToDo => "To-Do",
+        }
+    }
+}
+
+impl PartialEq<&str> for Status {
+    fn eq(&self, other: &&str) -> bool {
+        self.as_str() == *other
+    }
 }
 
 impl Ticket {
-    pub fn new(title: String, description: String, status: String) -> Ticket {
+    pub fn new(title: String, description: String, status: Status) -> Ticket {
         if title.is_empty() {
             panic!("Title cannot be empty");
         }
@@ -47,7 +67,7 @@ impl Ticket {
         &self.description
     }
 
-    pub fn status(&self) -> &String {
+    pub fn status(&self) -> &Status {
         &self.status
     }
 }
